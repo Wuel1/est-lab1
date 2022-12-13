@@ -1,76 +1,73 @@
-import java.util.List;
-
 public class ListaArray implements EstruturaDeDados{
 
     private int[] elementos;
     private int Contador;
 
-
     public ListaArray(){
-        elementos = new int[1000];
-        Contador = 0;
+        this.elementos = new int[10];
+        this.Contador = 0;
     }
 
     @Override
-    public boolean insert(int chave){
-        for(i = 0; i < elementos.lenght; i++){
-            if(elementos[i] == 0){
-                elementos[i] = chave;
-                Contador += 1;          
+    public boolean insert(int chave){ 
+        this.Contador = 0;       
+        for(int i = 0; i < this.elementos.length; i++){           
+            if(this.elementos[this.Contador] == 0 && this.Contador <= this.elementos.length){
+                this.elementos[i] = chave;
+                this.Contador += 1;
+                return true;                     
             }
         }
         return false;
     }
 
-    @Override
-    public boolean delete(int chave) {
-        for(i = 0; i < elementos.length; i++){
+    public boolean delete(int chave){
+        for(int i = 0; i < elementos.length; i++){
             if(elementos[i] == chave){
-               elementos[i] = -1;               
-            }
-
-        }
-        return false;
-    }
-
-    @Override
-    public boolean search(int chave) {
-        for(i = 0; i < elementos.lenght; i++){
-            if(elementos[i] == chave){
+                elementos[i] = -1;                
+                for(int j = i; j < elementos.length; j++){
+                    elementos[j] = elementos[j+1];
+                }
                 return true;
             }
-            else;
-                return false;
-        }        
+        }
+        return false;
     }
+    public boolean search(int chave){
+        for(int i = 0; i < elementos.length; i++){
+            if (elementos[i] == chave){
+                return true;
+            }            
+        }
+        return false;        
+    }
+    public int minimum(){
+        int i = 0;
+        return i;
+    }
+    public int maximum(){
+        int i = 0;
+        return i;
+    }
+    public int sucessor(int chave){
+        int i = 0;
+        return i;
+    }
+    public int prodessor(int chave){
+        int i = 0;
+        return i;
+    }
+    public void mostrar(){
 
-    // @Override
-    // public int minimum() {
-    //     // TODO Auto-generated method stub
-    //     return 0;
-    // }
-
-    // @Override
-    // public int maximum() {
-    //     // TODO Auto-generated method stub
-    //     return 0;
-    // }
-
-    // @Override
-    // public int sucessor(int chave) {
-    //     // TODO Auto-generated method stub
-    //     return 0;
-    // }
-
-    // @Override
-    // public int prodessor(int chave) {
-    //     // TODO Auto-generated method stub
-    //     return 0;
-    // }
-
+    }
+    
     public static void main(String[] args) {
         ListaArray r = new ListaArray();
-        r.insert(1);
-        r.delete(1);
+        System.out.println(r.insert(1));
+        System.out.println(r.insert(2));
+        System.out.println(r.insert(3));        
+        System.out.println(r.insert(4));        
+        System.out.println(r.insert(5));
+        System.out.println(r.delete(4));
     }
 }

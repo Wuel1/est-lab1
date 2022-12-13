@@ -6,4 +6,5 @@ public interface EstruturaDeDados {
     public int maximum();
     public int sucessor(int chave);
     public int prodessor(int chave);
+    public void mostrar();
 }
