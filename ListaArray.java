@@ -4,31 +4,32 @@ public class ListaArray implements EstruturaDeDados{
     private int Contador;
 
     public ListaArray(){
-        this.elementos = new int[10];
-        this.Contador = 0;
+        elementos = new int[10];
+        Contador = 0;
     }
 
     @Override
-    public boolean insert(int chave){ 
-        this.Contador = 0;       
-        for(int i = 0; i < this.elementos.length; i++){           
-            if(this.elementos[this.Contador] == 0 && this.Contador <= this.elementos.length){
-                this.elementos[i] = chave;
-                this.Contador += 1;
-                return true;                     
-            }
+    public boolean insert(int chave){              
+        for(int i = 0; i < elementos.length; i++){           
+            if(elementos[Contador] == 0 && Contador < elementos.length){
+                elementos[Contador] = chave;
+                Contador += 1;
+                return true;                                
+            }            
         }
         return false;
     }
-
     public boolean delete(int chave){
-        for(int i = 0; i < elementos.length; i++){
+        for(int i = 0; i < Contador; i++){
             if(elementos[i] == chave){
-                elementos[i] = -1;                
-                for(int j = i; j < elementos.length; j++){
+                elementos[i] = 0;
+                for(int j = i; j < Contador;j++){
+                    int controle = elementos[j];
                     elementos[j] = elementos[j+1];
+                    elementos[j+1] = controle;               
                 }
-                return true;
+             Contador -= 1;
+             return true;
             }
         }
         return false;
@@ -39,35 +40,78 @@ public class ListaArray implements EstruturaDeDados{
                 return true;
             }            
         }
-        return false;        
+        return false;      
     }
     public int minimum(){
-        int i = 0;
-        return i;
+        int min = elementos.length;
+        for(int i = 0; i < Contador; i++){
+            if(min > elementos[i]){                
+                min = elementos[i];
+            }
+        }
+        return min;
     }
     public int maximum(){
-        int i = 0;
-        return i;
+        int max = 0;
+        for(int i = 0; i < Contador; i++){
+            if(max < elementos[i]){
+                max = elementos[i];
+            }            
+        }
+        return max;     
     }
     public int sucessor(int chave){
-        int i = 0;
-        return i;
+        int sucessor =  0;
+        if(search(chave)){
+            for(int i = 0; i < Contador; i++){
+                if(elementos[i] == chave){
+                    sucessor = elementos[i+1];
+                    return sucessor;
+                }
+            }
+        }
+        return sucessor;
     }
     public int prodessor(int chave){
-        int i = 0;
-        return i;
-    }
-    public void mostrar(){
-
+        int prodessor =  0;
+        if(search(chave)){
+            for(int i = 0; i < Contador; i++){
+                if(elementos[i] == chave){
+                    prodessor = elementos[i-1];
+                    return prodessor;
+                }
+            }
+        }
+        return prodessor;
     }
     
-    public static void main(String[] args) {
-        ListaArray r = new ListaArray();
-        System.out.println(r.insert(1));
-        System.out.println(r.insert(2));
-        System.out.println(r.insert(3));        
-        System.out.println(r.insert(4));        
-        System.out.println(r.insert(5));
-        System.out.println(r.delete(4));
+    public void mostrar(){
+        for(int i = 0; i < elementos.length; i++){
+            System.out.println(elementos[i]);
+        }
     }
+
+
+    public static void main(String[] args) {
+        ListaArray teste = new ListaArray();
+        teste.insert(10);
+        teste.insert(11);
+        teste.insert(12);
+        teste.insert(13);
+        teste.insert(15);
+        teste.insert(19);
+        teste.insert(47);
+        teste.insert(15);
+        teste.insert(20);    
+    
+        
+        System.out.println(teste.maximum());
+        System.out.println(teste.minimum());
+        System.out.println(teste.sucessor(13));
+        System.out.println(teste.prodessor(15));
+        System.out.println(teste.search(11));
+        teste.delete(47);
+        System.out.println(teste.maximum());        
+        }
 }
+
